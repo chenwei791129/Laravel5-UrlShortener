@@ -13,7 +13,7 @@ class Ip2nationCountriesSeeder extends Seeder
     {
         DB::table('ip2nationCountries')->truncate();
         
-        $handle = fopen(storage_path('app').'/ip2nationCountries.sql', "r");
+        $handle = fopen(storage_path().'/ip2nationCountries.sql', "r");
         $contents = '';
         if ($handle) {
             while (!feof($handle)) {
