@@ -29,10 +29,7 @@ var chart = c3.generate({
             ['桌上型裝置', {{ $desktop_count }}],
             ['機器人', {{ $robot_count }}],
         ],
-        type : 'donut',
-        onclick: function (d, i) { console.log("onclick", d, i); },
-        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+        type : 'donut'
     },
     donut: {
         title: "裝置比例"
