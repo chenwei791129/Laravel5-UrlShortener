@@ -41,14 +41,14 @@
                                     @foreach($shrots as $shrot)
                                     <tr>
                                         <td>{{ \Carbon\Carbon::parse($shrot->created_at)->format('Y/m/d') }}</td>
-                                        <td><a href="/{{ $shrot->short_code }}" target="_blank">/{{ $shrot->short_code }}</a></td>
-                                        <td><a href="{{ $shrot->original_url }}" target="_blank">{{ $shrot->original_url }}</a></td>
+                                        <td><a href="{{ url($shrot->short_code) }}" target="_blank">/{{ $shrot->short_code }}</a></td>
+                                        <td><a href="{{ url($shrot->original_url) }}" target="_blank">{{ $shrot->original_url }}</a></td>
                                         <td>386</td>
                                         <td>126</td>
                                         <td>43</td>
                                         <td>{{ $shrot->remark }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="/{{ $shrot->short_code }}+" target="_blank">查看統計</a>
+                                            <a class="btn btn-primary" href="{{ url($shrot->short_code) }}+" target="_blank">查看統計</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -64,18 +64,6 @@
 @endsection
 @section('script')
 <script>
-/*
-var postdata = {
-    'data1': 'ok!!',
-}
-
-axios.post('/api/createshort', postdata, headers)
-.then(response => {
-    console.log(response.data);
-});
-
-*/
-
 new Vue({
   el: '#app',
   data: {
@@ -90,7 +78,7 @@ new Vue({
   methods: {
         create_short: function() {
             let postdata = { original_url: this.orig_url };
-            axios.post('/api/createshort', postdata, this.axios_headers)
+            axios.post("{{ url('api/createshort') }}", postdata, this.axios_headers)
             .then(response => {
                 console.log(response.data);
             });

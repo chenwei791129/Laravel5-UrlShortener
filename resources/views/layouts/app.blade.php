@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.18/c3.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('storage/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url('css/style.css') }}">
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -26,10 +26,10 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/admin">首頁 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url('admin') }}">首頁 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/urlmanage">短網址管理</a>
+                    <a class="nav-link" href="{{ url('admin/urlmanage') }}">短網址管理</a>
                 </li>
             </ul>
             <!-- Right Side Of Navbar -->

@@ -69,7 +69,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/admin') }}">管理頁面</a>
+                        <a href="{{ url('admin') }}">管理頁面</a>
                         <a href="{{ route('logout') }}">登出</a>
                     @else
                         <a href="{{ route('login') }}">登入</a>
