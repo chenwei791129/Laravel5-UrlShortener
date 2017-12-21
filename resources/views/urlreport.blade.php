@@ -37,7 +37,7 @@
             </div>
             <br />
             <div class="card">
-                <div class="card-header">來源*</div>
+                <div class="card-header">來源</div>
                 <div class="card-block">
                     <div class="container">
                         <div id="rferrers">
@@ -148,37 +148,33 @@ new Vue({
             axios.get("{{ url('api/rferrers_chart/'.$shrot->short_code) }}", this.axios_headers)
             .then(response => {
                 let chart_data = {
-                    x: 'x',
+                    type : 'donut',
                     columns: []
                 }
-                chart_data.columns.push(response.data.dates);
-                chart_data.columns.push(response.data.clicks);
+                chart_data.columns = response.data.result;
+                c3.generate({
+                    bindto: '#rferrers',
+                    data: chart_data,
+                    donut: {
+                        title: "裝置比例"
+                    }
+                });
             });
             console.log('call draw_rferrers_pie finish!');
         },
+        draw_click_map: function() {
+            console.log('call draw_click_map finish!');
+        }
   },
   mounted: function() {
       console.log('mounted!');
       this.draw_click_chart();
       this.draw_device_pie();
       this.draw_browser_pie();
-      //this.draw_rferrers_pie();
+      this.draw_rferrers_pie();
+      this.draw_click_map();
   }
 })
-c3.generate({
-    bindto: '#rferrers',
-    data: {
-        columns: [
-            ['桌上型裝置', 30],
-            ['行動裝置', 120],
-        ],
-        type : 'donut'
-    },
-    donut: {
-        title: "裝置比例"
-    }
-});
-
 
 Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_world_gdp_with_codes.csv', function(err, rows){
       function unpack(rows, key) {

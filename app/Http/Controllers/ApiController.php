@@ -58,11 +58,11 @@ class ApiController extends Controller
     {
         $data = new \stdClass;
         $items = Click::where('short_code', $shortcode)
-               ->select(DB::raw('browser, count(short_code) as \'count\''))
-               ->groupBy('browser')->get();
+               ->select(DB::raw('referer_domain, count(short_code) as \'count\''))
+               ->groupBy('referer_domain')->get();
         $result = [];
         foreach ($items as $item) {
-            $result[] = [$item->browser, $item->count];
+            $result[] = [$item->referer_domain, $item->count];
         }
 
         $data->result = $result;
