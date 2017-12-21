@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Shorturl;
 use Laravel\Passport\Passport;
 use Auth;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -26,8 +27,13 @@ class AdminController extends Controller
     // get urlmanage
     public function urlmanage()
     {
-        $shrots = Shorturl::orderby('id', 'desc')->get();
+        $shrots = Shorturl::orderby('id', 'desc')->paginate(20);
         $accessToken = Auth::user()->createToken('')->accessToken;
+        foreach ($shrots as $shrot) {
+            $shrot->day_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(1))->count();
+            $shrot->week_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(7))->count();
+            $shrot->month_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->count();
+        }
         return view('urlmanage', compact('accessToken', 'shrots'));
     }
     // post addurl
@@ -35,8 +41,14 @@ class AdminController extends Controller
     {
         # code...
     }
-    public function urlreport()
+    public function urlreport($shortcode)
     {
+        $shrot = Shorturl::where('short_code', $shortcode)->first();
+        $shrot->day_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(1))->count();
+        $shrot->week_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(7))->count();
+        $shrot->month_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->count();
+        $shrot->day_of_clicks = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->get();
+        dd($shrot);
         return view('urlreport');
     }
 }

@@ -43,9 +43,9 @@
                                         <td>{{ \Carbon\Carbon::parse($shrot->created_at)->format('Y/m/d') }}</td>
                                         <td><a href="{{ url($shrot->short_code) }}" target="_blank">/{{ $shrot->short_code }}</a></td>
                                         <td><a href="{{ url($shrot->original_url) }}" target="_blank">{{ $shrot->original_url }}</a></td>
-                                        <td>386</td>
-                                        <td>126</td>
-                                        <td>43</td>
+                                        <td>{{ $shrot->month_click }}</td>
+                                        <td>{{ $shrot->week_click }}</td>
+                                        <td>{{ $shrot->day_click }}</td>
                                         <td>{{ $shrot->remark }}</td>
                                         <td>
                                             <a class="btn btn-primary" href="{{ url($shrot->short_code) }}+" target="_blank">查看統計</a>
@@ -53,6 +53,7 @@
                                     </tr>
                                     @endforeach
                                 </table>
+                                {{ $shrots->links('vendor.pagination.bootstrap-4') }}
                             </div>
                         </div>
                     </div>

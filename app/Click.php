@@ -12,4 +12,9 @@ class Click extends Model
     protected $table = 'clicks';
 
     protected $guarded = [];
+
+    public function shorturl()
+    {
+        return $this->belongsTo('App\Shorturl', 'short_code', 'short_code');
+    }
 }
