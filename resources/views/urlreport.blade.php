@@ -172,11 +172,11 @@ new Vue({
       this.draw_device_pie();
       this.draw_browser_pie();
       this.draw_rferrers_pie();
-      this.draw_click_map();
+      //this.draw_click_map();
   }
 })
 
-Plotly.d3.csv("{{ url('api/map_chart/'.$shrot->short_code) }}", function(err, rows) {
+Plotly.d3.csv("{{ url('api/map_chart/'.$shrot->short_code) }}").header("Authorization", 'Bearer {{ $accessToken }}').get(function(err, rows) {
     function unpack(rows, key) {
         return rows.map(function(row) { return row[key]; });
     }

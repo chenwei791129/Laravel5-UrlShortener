@@ -20,7 +20,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/device_chart/{shortcode}', 'ApiController@report_device_pie');
     Route::get('/browser_chart/{shortcode}', 'ApiController@report_browser_pie');
     Route::get('/rferrers_chart/{shortcode}', 'ApiController@report_rferrers_pie');
-    
+    Route::get('/map_chart/{shortcode}', 'ApiController@report_map');
 });
-
-Route::get('/map_chart/{shortcode}', 'ApiController@report_map');
