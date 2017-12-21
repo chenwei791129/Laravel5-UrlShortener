@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware(['auth:api'])->group(function () {
-    Route::get('/createshort', 'ApiController@createshort');
     Route::post('/createshort', 'ApiController@createshort');
     Route::get('/click_chart/{shortcode}', 'ApiController@clicks_of_days');
     Route::get('/device_chart/{shortcode}', 'ApiController@report_device_pie');

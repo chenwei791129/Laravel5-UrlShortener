@@ -17,7 +17,6 @@ Auth::routes();
 
 Route::get('/admin', 'AdminController@home');
 Route::get('/admin/urlmanage', 'AdminController@urlmanage');
-Route::post('/admin/addurl', 'AdminController@createurl');
 
 Route::get('/{shortcode}', 'UrlShortController@goUrl')->where('shortcode', '[A-Za-z0-9]+');
 Route::get('/{shortcode}+', 'AdminController@urlreport')->where('shortcode', '[A-Za-z0-9]+');

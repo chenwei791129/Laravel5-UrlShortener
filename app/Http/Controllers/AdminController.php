@@ -40,11 +40,6 @@ class AdminController extends Controller
         }
         return view('urlmanage', compact('accessToken', 'shrots'));
     }
-    // post addurl
-    public function createurl()
-    {
-        # code...
-    }
     public function urlreport($shortcode)
     {
         $accessToken = Auth::user()->createToken('')->accessToken;
