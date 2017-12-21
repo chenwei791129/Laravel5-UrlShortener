@@ -23,7 +23,8 @@ class UrlShortController extends Controller
             'browser' => Agent::browser(),
             'browser_version' => Agent::version(Agent::browser()),
             'client_ip_addrs' => json_encode(getClientIp()),
-            'country_from' => $this->getCountry()
+            'country_from' => $this->getCountry(),
+            'referer' => $_SERVER['HTTP_REFERER']
         ]);
 
         return redirect(Shorturl::where('short_code', $shortcode)->first()->original_url);

@@ -92,9 +92,6 @@ new Vue({
                 }
             });
         }
-  },
-  mounted: function() {
-      console.log('mounted');
   }
 })
 </script>

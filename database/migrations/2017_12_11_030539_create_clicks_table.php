@@ -25,6 +25,7 @@ class CreateClicksTable extends Migration
             $table->string('country_from')->nullable();
             $table->string('geo_latitude')->nullable();
             $table->string('geo_longitude')->nullable();
+            $table->string('referer');
             $table->timestamps();
         });
     }

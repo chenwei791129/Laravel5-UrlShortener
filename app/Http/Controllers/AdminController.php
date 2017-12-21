@@ -47,12 +47,15 @@ class AdminController extends Controller
     }
     public function urlreport($shortcode)
     {
+        dd($_SERVER);
+        $accessToken = Auth::user()->createToken('')->accessToken;
         $shrot = Shorturl::where('short_code', $shortcode)->first();
+        $shrot->total_click = $shrot->clicks()->count();
         $shrot->day_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(1))->count();
         $shrot->week_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(7))->count();
         $shrot->month_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->count();
         $shrot->day_of_clicks = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->get();
-        dd($shrot);
-        return view('urlreport');
+        //dd($shrot);
+        return view('urlreport', compact('shrot', 'accessToken'));
     }
 }
