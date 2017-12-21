@@ -70,10 +70,24 @@ class ApiController extends Controller
         return json_encode($data);
     }
 
-    public function report_map()
+    public function report_map($shortcode)
     {
-        $data = new \stdClass;
-        return json_encode($data);
+        /* csv format:
+            COUNTRY,click,CODE
+            Afghanistan,21.71,AFG
+            Albania,13.40,ALB
+        */
+        $results = Click::where('short_code', $shortcode)->select(DB::raw('country_from, country_code, count(short_code) as \'count\''))->groupBy('country_from', 'country_code')->get();
+      
+        $csv = "COUNTRY,click,CODE";
+        foreach ($results as $result) {
+            $csv .= "\n$result->country_from,$result->count,$result->country_code";
+        }
+        
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename="'.$shortcode.'.csv"');
+
+        echo $csv;
     }
 
     public function createshort(Request $req)

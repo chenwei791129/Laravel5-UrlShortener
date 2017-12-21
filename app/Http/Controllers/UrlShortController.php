@@ -27,7 +27,8 @@ class UrlShortController extends Controller
                 'browser' => Agent::browser(),
                 'browser_version' => Agent::version(Agent::browser()),
                 'client_ip_addrs' => json_encode(getClientIp()),
-                'country_from' => $this->getCountry(),
+                'country_from' => $this->getCountry()->country,
+                'country_code' => $this->getCountry()->iso_code_3,
             ];
             if(array_key_exists('HTTP_REFERER',$_SERVER)) {
                 $data['referer'] = $_SERVER['HTTP_REFERER'];
@@ -35,7 +36,7 @@ class UrlShortController extends Controller
             }
             Click::create($data);
         } catch(\Exception  $e) {
-            Log::error('create click error');
+            Log::error(print_r($e->getMessage(), true));
         }
 
         return redirect(Shorturl::where('short_code', $shortcode)->first()->original_url);
@@ -43,10 +44,15 @@ class UrlShortController extends Controller
     private function getCountry($ip = null)
     {
         if(empty($ip)) $ip = getClientIp()['REMOTE_ADDR'];
-        if($ip == '127.0.0.1' || $ip == '::1') return 'localhost';
+        if($ip == '127.0.0.1' || $ip == '::1') {
+            $obj = new \stdClass;
+            $obj->country = 'localhost';
+            $obj->iso_code_3 = 'localhost';
+            return $obj;
+        }
         $sql = '
         SELECT 
-            c.country 
+            c.country, iso_code_3
         FROM 
             ip2nationCountries c,
             ip2nation i 
@@ -58,6 +64,6 @@ class UrlShortController extends Controller
             i.ip DESC 
         LIMIT 0,1';
 
-        return collect(DB::select(DB::raw($sql)))->first()->country;
+        return collect(DB::select(DB::raw($sql)))->first();
     }
 }
