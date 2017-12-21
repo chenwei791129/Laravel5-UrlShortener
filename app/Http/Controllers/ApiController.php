@@ -27,7 +27,7 @@ class ApiController extends Controller
             $response->user = Auth::user();
         } else {
             $response->Status = 'failure';
-            $response->Error_msg = 'url format error';
+            $response->Error_msg = '網址格式錯誤';
         }
         return json_encode($response);
     }

@@ -25,10 +25,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item{{ setActive('admin') }}">
                     <a class="nav-link" href="{{ url('admin') }}">首頁 <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item{{ setActive('admin/urlmanage') }}">
                     <a class="nav-link" href="{{ url('admin/urlmanage') }}">短網址管理</a>
                 </li>
             </ul>
@@ -36,8 +36,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a href="{{ route('login') }}">登入</a></li>
-                    <li><a href="{{ route('register') }}">註冊</a></li>
+                    <li><a class="nav-link" href="{{ route('login') }}">登入</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">註冊</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">

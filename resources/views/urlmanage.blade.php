@@ -8,11 +8,11 @@
                 <div class="card-header text-white bg-dark">短網址管理</div>
                 <div class="card-block">
                     <div class="container">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
+                        <p>
+                            <div id="alert" class="alert alert-warning hide" role="alert">
+                                <strong>發生問題！</strong> @{{ error_msg }}！
                             </div>
-                        @endif
+                        </p>
                         <p>
                         <div class="row">
                             <div class="col-sm-6">
@@ -24,7 +24,7 @@
                                 </div><!-- /input-group -->
                             </div><!-- /.col-lg-6 -->
                         </div><!-- /.row -->
-                        <br />
+                        </p>
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-responsive">
@@ -74,13 +74,18 @@ new Vue({
         }
     },
     orig_url: null,
+    error_msg: ''
   },
   methods: {
         create_short: function() {
             let postdata = { original_url: this.orig_url };
             axios.post("{{ url('api/createshort') }}", postdata, this.axios_headers)
             .then(response => {
-                console.log(response.data);
+                if(response.data.Status === 'success') window.location.reload();
+                else {
+                    this.error_msg = response.data.Error_msg;
+                    $("#alert").removeClass('hide');
+                }
             });
         }
   },
