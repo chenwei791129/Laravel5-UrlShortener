@@ -7,6 +7,7 @@ use App\Shorturl;
 use Laravel\Passport\Passport;
 use Auth;
 use Carbon\Carbon;
+use App\Click;
 
 class AdminController extends Controller
 {
@@ -22,7 +23,10 @@ class AdminController extends Controller
     // get admin
     public function home()
     {
-        return view('home');
+        $desktop_count = Click::where('isDesktop', true)->where('isRobot', false)->count();
+        $mobile_count = Click::where('isDesktop', false)->where('isRobot', false)->count();
+        $robot_count = Click::where('isRobot', true)->count();
+        return view('home', compact('desktop_count', 'mobile_count', 'robot_count'));
     }
     // get urlmanage
     public function urlmanage()

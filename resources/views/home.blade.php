@@ -25,8 +25,9 @@
 var chart = c3.generate({
     data: {
         columns: [
-            ['行動裝置', 30],
-            ['桌上型裝置', 120],
+            ['行動裝置', {{ $mobile_count }}],
+            ['桌上型裝置', {{ $desktop_count }}],
+            ['機器人', {{ $robot_count }}],
         ],
         type : 'donut',
         onclick: function (d, i) { console.log("onclick", d, i); },

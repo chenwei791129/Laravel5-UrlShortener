@@ -17,7 +17,7 @@ class ApiController extends Controller
             $result = Shorturl::create([
                 'original_url' => $req->original_url,
                 'short_code' => $short_code,
-                'remark' => '備註~!',
+                'remark' => $req->remark,
                 'created_by' => Auth::user()->id,
             ]);
             $response->Status = 'success';

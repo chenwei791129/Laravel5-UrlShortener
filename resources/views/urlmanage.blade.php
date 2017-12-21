@@ -15,9 +15,10 @@
                         </p>
                         <p>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-10">
                                 <div class="input-group">
-                                <input type="text" class="form-control" v-model="orig_url" placeholder="輸入網址...">
+                                <input type="text" class="form-control col-sm-6" v-model="orig_url" placeholder="輸入網址...">
+                                <input type="text" class="form-control col-sm-2" v-model="remark" placeholder="輸入備註...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button" @click="create_short()">建立短網址!</button>
                                 </span>
@@ -75,11 +76,13 @@ new Vue({
         }
     },
     orig_url: null,
-    error_msg: ''
+    remark: '',
+    error_msg: '',
+    
   },
   methods: {
         create_short: function() {
-            let postdata = { original_url: this.orig_url };
+            let postdata = { original_url: this.orig_url, remark: this.remark };
             axios.post("{{ url('api/createshort') }}", postdata, this.axios_headers)
             .then(response => {
                 if(response.data.Status === 'success') window.location.reload();
