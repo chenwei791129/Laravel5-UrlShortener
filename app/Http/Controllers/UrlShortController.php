@@ -7,6 +7,7 @@ use DB;
 use App\Shorturl;
 use Agent;
 use App\Click;
+use Log;
 
 class UrlShortController extends Controller
 {
@@ -14,18 +15,28 @@ class UrlShortController extends Controller
     {
         $item = Shorturl::where('short_code', $shortcode)->first();
         if(empty($item)) return response()->view('errors.HTTP404', array(), 404);
-        Click::create([
-            'short_code' => $shortcode,
-            'isRobot' => Agent::isRobot(),
-            'isDesktop' => Agent::isDesktop(),
-            'platform' => Agent::platform(),
-            'platform_version' => Agent::version(Agent::platform()),
-            'browser' => Agent::browser(),
-            'browser_version' => Agent::version(Agent::browser()),
-            'client_ip_addrs' => json_encode(getClientIp()),
-            'country_from' => $this->getCountry(),
-            'referer' => $_SERVER['HTTP_REFERER']
-        ]);
+
+        // 對於無法預期資料謹慎處理，記錄錯誤
+        try {
+            $data = [
+                'short_code' => $shortcode,
+                'isRobot' => Agent::isRobot(),
+                'isDesktop' => Agent::isDesktop(),
+                'platform' => Agent::platform(),
+                'platform_version' => Agent::version(Agent::platform()),
+                'browser' => Agent::browser(),
+                'browser_version' => Agent::version(Agent::browser()),
+                'client_ip_addrs' => json_encode(getClientIp()),
+                'country_from' => $this->getCountry(),
+            ];
+            if(array_key_exists('HTTP_REFERER',$_SERVER)) {
+                $data['referer'] = $_SERVER['HTTP_REFERER'];
+                $data['referer_domain'] = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+            }
+            Click::create($data);
+        } catch(\Exception  $e) {
+            Log::error('create click error');
+        }
 
         return redirect(Shorturl::where('short_code', $shortcode)->first()->original_url);
     }

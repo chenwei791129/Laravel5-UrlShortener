@@ -47,7 +47,6 @@ class AdminController extends Controller
     }
     public function urlreport($shortcode)
     {
-        dd($_SERVER);
         $accessToken = Auth::user()->createToken('')->accessToken;
         $shrot = Shorturl::where('short_code', $shortcode)->first();
         $shrot->total_click = $shrot->clicks()->count();

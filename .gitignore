@@ -6,6 +6,7 @@
 /.idea
 /.vagrant
 /database/database.sqlite
+/database/database.sqlite-journal
 Homestead.json
 Homestead.yaml
 npm-debug.log
