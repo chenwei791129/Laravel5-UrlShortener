@@ -3,6 +3,8 @@
 
 資料庫經過測試，支援 SQLite、MySQL、SQL Server(包含 Azure SQL Database) 三種
 
+HTTP Server 可用在 IIS、apache、nginx
+
 ## 如何開始？
 
 從 .env.example 複製一個出來到 .env 並且正確設定資料庫登入資訊、reCAPTCHA 金鑰
