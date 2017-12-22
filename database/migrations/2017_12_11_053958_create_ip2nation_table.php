@@ -14,7 +14,7 @@ class CreateIp2nationTable extends Migration
     public function up()
     {
         Schema::create('ip2nation', function (Blueprint $table) {
-            $table->integer('ip')->default(0);
+            $table->bigInteger('ip')->default(0);
             $table->char('country', 2);
         });
     }
