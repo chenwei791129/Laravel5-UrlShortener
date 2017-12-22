@@ -2,7 +2,8 @@
 $helpers = [
     'UrlHelper.php',
     'IpHelper.php',
-    'ViewHelper.php'
+    'ViewHelper.php',
+    'DatabaseHelper.php'
 ];
 
 // 載入 Helper 檔案

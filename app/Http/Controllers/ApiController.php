@@ -14,12 +14,16 @@ class ApiController extends Controller
     public function clicks_of_days($shortcode)
     {
         $data = new \stdClass;
-        $clicks_of_days = Click::where('short_code', $shortcode)->select(DB::raw('date(created_at) as \'date\', count(isRobot) as \'click\''))->groupBy(DB::raw('date(created_at)'))->get();
+        $clicks_of_days = null;
+        if(current_db_driver() == 'sqlsrv')
+            $clicks_of_days = Click::where('short_code', $shortcode)->select(DB::raw('CAST(created_at AS DATE) as \'cdate\', count(isRobot) as \'click\''))->groupBy(DB::raw('CAST(created_at AS DATE)'))->get();
+        else
+            $clicks_of_days = Click::where('short_code', $shortcode)->select(DB::raw('date(created_at) as \'cdate\', count(isRobot) as \'click\''))->groupBy(DB::raw('date(created_at)'))->get();
         $dates = ['x'];
         $clicks = ['日點擊數'];
 
         foreach ($clicks_of_days as $item) {
-            $dates[] = $item->date;
+            $dates[] = $item->cdate;
             $clicks[] = $item->click;
         }
 
