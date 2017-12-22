@@ -5,6 +5,8 @@
 
 HTTP Server 可用在 IIS、apache、nginx
 
+目前 Laravel 使用 5.5 版本，所以 PHP 最低版本需 >= 7.0.0
+
 ## 如何開始？
 
 從 .env.example 複製一個出來到 .env 並且正確設定資料庫登入資訊、reCAPTCHA 金鑰
