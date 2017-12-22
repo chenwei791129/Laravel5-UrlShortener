@@ -19,6 +19,7 @@ class Ip2nationSeeder extends Seeder
         if ($handle) {
             while (!feof($handle)) {
                 $sql = fgets($handle);
+                echo "run: $sql\n";
                 DB::statement($sql);
             }
             fclose($handle);

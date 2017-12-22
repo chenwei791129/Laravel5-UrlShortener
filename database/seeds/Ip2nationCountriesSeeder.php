@@ -18,6 +18,10 @@ class Ip2nationCountriesSeeder extends Seeder
         if ($handle) {
             while (!feof($handle)) {
                 $sql = fgets($handle);
+                $sql = utf8_encode($sql);
+                $sql = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S','',$sql);
+                $sql = preg_replace('/[^\x00-\x7F]+/S','',$sql);
+                echo "run: $sql\n";
                 DB::statement($sql);
             }
             fclose($handle);
