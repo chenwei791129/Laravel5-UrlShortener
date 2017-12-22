@@ -50,20 +50,11 @@ class UrlShortController extends Controller
             $obj->iso_code_3 = 'localhost';
             return $obj;
         }
-        $sql = '
-        SELECT 
-            c.country, iso_code_3
-        FROM 
-            ip2nationCountries c,
-            ip2nation i 
-        WHERE 
-            i.ip < "'.ip2long($ip).'"
-            AND 
-            c.code = i.country 
-        ORDER BY 
-            i.ip DESC 
-        LIMIT 0,1';
-
-        return collect(DB::select(DB::raw($sql)))->first();
+        return DB::table('ip2nation')
+        ->select('ip2nationCountries.iso_code_3', 'ip2nationCountries.country')
+        ->join('ip2nationCountries', 'ip2nation.country', '=', 'ip2nationCountries.code')
+        ->where('ip2nation.ip', '<', ip2long($ip))
+        ->orderBy('ip2nation.ip', 'desc')
+        ->first();
     }
 }
