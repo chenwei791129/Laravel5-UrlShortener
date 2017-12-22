@@ -7,8 +7,10 @@
 
 從 .env.example 複製一個出來到 .env 並且正確設定資料庫登入資訊、reCAPTCHA 金鑰
 
+`composer instll`
+
 ``
-composer instll
+
 
 php artisan key:generate
 
