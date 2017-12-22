@@ -73,7 +73,6 @@
                         <a href="{{ route('logout') }}">登出</a>
                     @else
                         <a href="{{ route('login') }}">登入</a>
-                        <a href="{{ route('register') }}">註冊</a>
                     @endauth
                 </div>
             @endif

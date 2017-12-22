@@ -36,8 +36,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">登入</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">註冊</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
