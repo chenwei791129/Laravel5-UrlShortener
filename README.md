@@ -9,12 +9,16 @@
 
 ``
 composer instll
+
 php artisan key:generate
+
 php artisan migrate
+
 php artisan db:seed
+
 php artisan passport:install
 ``
-
+## 開始使用吧！
 預設登入帳號為：demo@domain.com
 
 預設登入密碼為：P@ssw0rd
