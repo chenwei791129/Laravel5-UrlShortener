@@ -1,5 +1,5 @@
 # Laravel5-UrlShortener
-自製短網址系統 ( 使用 Laravel 5 &amp; Bootstrap 4 )
+自製短網址系統 ( 使用 Laravel 5 &amp; Bootstrap 4 & clipboard.js & jQuery & Vue.js & C3.js & axios)
 
 資料庫經過測試，支援 SQLite、MySQL、SQL Server(包含 Azure SQL Database) 三種
 
