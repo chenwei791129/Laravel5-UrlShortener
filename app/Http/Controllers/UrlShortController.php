@@ -16,29 +16,33 @@ class UrlShortController extends Controller
         $item = Shorturl::where('short_code', $shortcode)->first();
         if(empty($item)) return response()->view('errors.HTTP404', array(), 404);
 
-        // 對於無法預期資料謹慎處理，記錄錯誤
-        try {
-            $data = [
-                'short_code' => $shortcode,
-                'isRobot' => Agent::isRobot(),
-                'isDesktop' => Agent::isDesktop(),
-                'platform' => Agent::platform(),
-                'platform_version' => Agent::version(Agent::platform()),
-                'browser' => Agent::browser(),
-                'browser_version' => Agent::version(Agent::browser()),
-                'client_ip_addrs' => json_encode(getClientIp()),
-                'country_from' => $this->getCountry()->country,
-                'country_code' => $this->getCountry()->iso_code_3,
-            ];
-            if(array_key_exists('HTTP_REFERER',$_SERVER)) {
-                $data['referer'] = $_SERVER['HTTP_REFERER'];
-                $data['referer_domain'] = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+        // 如果不在忽略清單中，紀錄點擊
+        if(!in_array(getClientIp()['REMOTE_ADDR'], json_decode(env('NO_RECORD_IP'))))
+        {
+            // 對於無法預期資料謹慎處理，記錄錯誤
+            try {
+                $data = [
+                    'short_code' => $shortcode,
+                    'isRobot' => Agent::isRobot(),
+                    'isDesktop' => Agent::isDesktop(),
+                    'platform' => Agent::platform(),
+                    'platform_version' => Agent::version(Agent::platform()),
+                    'browser' => Agent::browser(),
+                    'browser_version' => Agent::version(Agent::browser()),
+                    'client_ip_addrs' => json_encode(getClientIp()),
+                    'country_from' => $this->getCountry()->country,
+                    'country_code' => $this->getCountry()->iso_code_3,
+                ];
+                if(array_key_exists('HTTP_REFERER',$_SERVER)) {
+                    $data['referer'] = $_SERVER['HTTP_REFERER'];
+                    $data['referer_domain'] = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+                }
+                Click::create($data);
+            } catch(\Exception  $e) {
+                Log::error(print_r($e->getMessage(), true));
             }
-            Click::create($data);
-        } catch(\Exception  $e) {
-            Log::error(print_r($e->getMessage(), true));
         }
-
+        
         return redirect(Shorturl::where('short_code', $shortcode)->first()->original_url);
     }
     private function getCountry($ip = null)
