@@ -42,8 +42,10 @@
                                     @foreach($shrots as $shrot)
                                     <tr>
                                         <td>{{ \Carbon\Carbon::parse($shrot->created_at)->format('Y/m/d') }}</td>
-                                        <td><a href="{{ url($shrot->short_code) }}" target="_blank">/{{ $shrot->short_code }}</a></td>
-                                        <td><a href="{{ url($shrot->original_url) }}" target="_blank">{{ $shrot->original_url }}</a></td>
+                                        <td>
+                                            <button class="btn btn-link clipboard" data-clipboard-text="{{ url($shrot->short_code) }}" data-toggle="tooltip" data-placement="bottom" title="">/{{ $shrot->short_code }}</button>
+                                        </td>
+                                        <td><a class="btn btn-link max-witdth-25vw" href="{{ url($shrot->original_url) }}" target="_blank">{{ $shrot->original_url }}</a></td>
                                         <td>{{ $shrot->month_click }}</td>
                                         <td>{{ $shrot->week_click }}</td>
                                         <td>{{ $shrot->day_click }}</td>
@@ -65,7 +67,18 @@
 </div>
 @endsection
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 <script>
+var clipboard = new Clipboard('.clipboard');
+clipboard.on('success', function(e) {
+    $(e.trigger).attr('title', '已複製！');
+    $(e.trigger).tooltip('show');
+    e.clearSelection();
+    setTimeout(function (){
+        $(e.trigger).tooltip("dispose");
+    }, 1000);
+    
+});
 new Vue({
   el: '#app',
   data: {

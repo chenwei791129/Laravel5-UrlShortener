@@ -4,8 +4,8 @@
 <div class="container" id="app">
     <div class="jumbotron">
         <div class="container">
-            <h4 class="card-title"><a href="{{ url($shrot->original_url) }}" class="card-link">短網址：{{ url($shrot->short_code) }}</a></h4>
-            <h4 class="card-title"><a href="{{ $shrot->original_url }}" class="card-link">原始網址：{{ $shrot->original_url }}</a></h4>
+            <h4 class="card-title"><a href="{{ url($shrot->original_url) }}" class="card-link" target="_blank">短網址：{{ url($shrot->short_code) }}</a></h4>
+            <h4 class="card-title"><a href="{{ $shrot->original_url }}" class="card-link" target="_blank">原始網址：{{ $shrot->original_url }}</a></h4>
             <h4 class="card-title">備註：{{ $shrot->remark }}</h4>
             <h4 class="card-title">建立日期：{{ $shrot->created_at }}</h4>
         </div>
