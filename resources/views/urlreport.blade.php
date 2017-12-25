@@ -156,7 +156,7 @@ new Vue({
                     bindto: '#rferrers',
                     data: chart_data,
                     donut: {
-                        title: "裝置比例"
+                        title: "點擊來源"
                     }
                 });
             });
