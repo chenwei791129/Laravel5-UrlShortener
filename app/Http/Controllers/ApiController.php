@@ -97,7 +97,7 @@ class ApiController extends Controller
     public function createshort(Request $req)
     {
         $response = new \stdClass;
-        if(filter_var($req->original_url, FILTER_VALIDATE_URL))
+        if(filter_var($req->original_url, FILTER_VALIDATE_URL) && !empty($req->remark))
         {
             $short_code = $this->_get_unique_short($req->original_url);            
             $result = Shorturl::create([
@@ -111,6 +111,9 @@ class ApiController extends Controller
             $response->Short_code = $short_code;
             $response->result = $result;
             $response->user = Auth::user();
+        } elseif(empty($req->remark)) {
+            $response->Status = 'failure';
+            $response->Error_msg = '請輸入備註';
         } else {
             $response->Status = 'failure';
             $response->Error_msg = '網址格式錯誤';
