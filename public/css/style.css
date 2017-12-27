@@ -14,3 +14,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
 }
+
+.create-date {
+    text-align: center;
+}

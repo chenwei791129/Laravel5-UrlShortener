@@ -15,4 +15,9 @@ class Shorturl extends Model
     {
         return $this->hasMany('App\Click', 'short_code', 'short_code');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+    }
 }

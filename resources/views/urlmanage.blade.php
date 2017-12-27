@@ -30,6 +30,7 @@
                             <div class="col-sm-12">
                                 <table class="table table-responsive">
                                     <tr>
+                                        <th>建立者</th>
                                         <th>建立日期</th>
                                         <th>短網址</th>
                                         <th>原始網址</th>
@@ -41,7 +42,8 @@
                                     </tr>
                                     @foreach($shrots as $shrot)
                                     <tr>
-                                        <td>{{ \Carbon\Carbon::parse($shrot->created_at)->format('Y/m/d') }}</td>
+                                        <td>{{ $shrot->user->name }}</td>
+                                        <td class="create-date">{!! \Carbon\Carbon::parse($shrot->created_at)->format('Y/m/d <\b\r /> H:i:s') !!}</td>
                                         <td>
                                             <button class="btn btn-link clipboard" data-clipboard-text="{{ url($shrot->short_code) }}" data-toggle="tooltip" data-placement="bottom" title="">/{{ $shrot->short_code }}</button>
                                         </td>
