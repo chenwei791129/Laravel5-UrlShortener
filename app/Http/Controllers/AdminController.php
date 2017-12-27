@@ -49,7 +49,6 @@ class AdminController extends Controller
         $shrot->week_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(7))->count();
         $shrot->month_click = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->count();
         $shrot->day_of_clicks = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->get();
-        //dd($shrot);
         return view('urlreport', compact('shrot', 'accessToken'));
     }
 }

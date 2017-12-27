@@ -76,11 +76,6 @@ class ApiController extends Controller
 
     public function report_map($shortcode)
     {
-        /* csv format:
-            COUNTRY,click,CODE
-            Afghanistan,21.71,AFG
-            Albania,13.40,ALB
-        */
         $results = Click::where('short_code', $shortcode)->select(DB::raw('country_from, country_code, count(short_code) as \'count\''))->groupBy('country_from', 'country_code')->get();
       
         $csv = "COUNTRY,click,CODE";

@@ -2,25 +2,48 @@
 
 @section('content')
 <div class="container" id="app">
-    <div class="jumbotron">
-        <div class="container">
-            <h4 class="card-title"><a href="{{ url($shrot->original_url) }}" class="card-link" target="_blank">短網址：{{ url($shrot->short_code) }}</a></h4>
-            <h4 class="card-title"><a href="{{ $shrot->original_url }}" class="card-link" target="_blank">原始網址：{{ $shrot->original_url }}</a></h4>
-            <h4 class="card-title">備註：{{ $shrot->remark }}</h4>
-            <h4 class="card-title">建立日期：{{ $shrot->created_at }}</h4>
+    <div class="row">
+        <div class="col-lg-8">
+            <h1><a href="{{ url($shrot->short_code) }}" class="card-link" target="_blank">/{{ $shrot->short_code }}</a></h1>
+            <h4>原始網址：<a href="{{ $shrot->original_url }}" class="card-link" target="_blank">{{ $shrot->original_url }}</a></h4>
+            <h4>備註：{{ $shrot->remark }}</h4>
+            <h4>建立日期：{{ $shrot->created_at }}</h4>
+        </div>
+        <div class="col-lg-4">
+            <h4>總點擊數：{{ $shrot->total_click }}</h4>
+            <h4>月點擊數：{{ $shrot->month_click }}</h4>
+            <h4>周點擊數：{{ $shrot->week_click }}</h4>
+            <h4>日點擊數：{{ $shrot->day_click }}</h4>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div>
-                    <h4>總點擊數：{{ $shrot->total_click }}</h4>
-            </div>
-            <br />
             <div class="card">
                 <div class="card-header">每日流量</div>
                 <div class="card-block">
                     <div class="container">
                         <div id="month_clicks">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-header">瀏覽地區*</div>
+                <div class="card-block">
+                    <div class="container">
+                        <div id="map">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">瀏覽器比例</div>
+                <div class="card-block">
+                    <div class="container">
+                        <div id="browser">
                         </div>
                     </div>
                 </div>
@@ -41,27 +64,6 @@
                 <div class="card-block">
                     <div class="container">
                         <div id="rferrers">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">瀏覽器比例</div>
-                <div class="card-block">
-                    <div class="container">
-                        <div id="browser">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="card">
-                <div class="card-header">瀏覽地區*</div>
-                <div class="card-block">
-                    <div class="container">
-                        <div id="map">
                         </div>
                     </div>
                 </div>
