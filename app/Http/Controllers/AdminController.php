@@ -23,10 +23,8 @@ class AdminController extends Controller
     // get admin
     public function home()
     {
-        $desktop_count = Click::where('isDesktop', true)->where('isRobot', false)->count();
-        $mobile_count = Click::where('isDesktop', false)->where('isRobot', false)->count();
-        $robot_count = Click::where('isRobot', true)->count();
-        return view('home', compact('desktop_count', 'mobile_count', 'robot_count'));
+        $accessToken = Auth::user()->createToken('')->accessToken;
+        return view('home', compact('accessToken'));
     }
     // get urlmanage
     public function urlmanage()

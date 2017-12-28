@@ -20,4 +20,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/browser_chart/{shortcode}', 'ApiController@report_browser_pie');
     Route::get('/rferrers_chart/{shortcode}', 'ApiController@report_rferrers_pie');
     Route::get('/map_chart/{shortcode}', 'ApiController@report_map');
+    Route::get('/click_chart', 'ApiController@clicks_of_days');
+    Route::get('/device_chart', 'ApiController@report_device_pie');
+    Route::get('/browser_chart', 'ApiController@report_browser_pie');
 });
