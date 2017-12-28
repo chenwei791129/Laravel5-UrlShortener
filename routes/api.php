@@ -23,4 +23,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/click_chart', 'ApiController@clicks_of_days');
     Route::get('/device_chart', 'ApiController@report_device_pie');
     Route::get('/browser_chart', 'ApiController@report_browser_pie');
+
+    // 外部串聯用
+    Route::get('/get_clicks/{shortcode}', 'ApiController@get_clicks');
 });

@@ -12,6 +12,21 @@ use stdClass;
 
 class ApiController extends Controller
 {
+    public function get_clicks($shortcode)
+    {
+        $data = new stdClass;
+
+        $shrot = Shorturl::where('short_code', $shortcode)->first();
+
+        $data->link_created = $shrot->created_at;
+        $data->all_count = $shrot->clicks()->count();
+        $data->month_count = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->submonth(1))->count();
+        $data->week_count = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(7))->count();
+        $data->day_count = $shrot->clicks()->whereDate('created_at', '>', Carbon::today()->subday(1))->count();
+
+        return json_encode($data);
+    }
+
     public function clicks_of_days($shortcode = null)
     {
         $data = new stdClass;
