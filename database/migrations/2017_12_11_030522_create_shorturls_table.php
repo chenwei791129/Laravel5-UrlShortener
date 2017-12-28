@@ -15,7 +15,7 @@ class CreateShorturlsTable extends Migration
     {
         Schema::create('shorturls', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('original_url');
+            $table->string('original_url', 2048);
             $table->string('short_code')->unique();
             $table->string('remark');
             $table->integer('created_by');
