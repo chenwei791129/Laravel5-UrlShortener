@@ -3,7 +3,7 @@
 @section('content')
 <div class="container" id="app">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 word-break-all">
             <h1><a href="{{ url($shrot->short_code) }}" class="card-link" target="_blank">/{{ $shrot->short_code }}</a></h1>
             <h4>原始網址：<a href="{{ $shrot->original_url }}" class="card-link" target="_blank">{{ $shrot->original_url }}</a></h4>
             <h4>備註：{{ $shrot->remark }}</h4>
