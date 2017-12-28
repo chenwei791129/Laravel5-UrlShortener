@@ -3,14 +3,14 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div id="clicks"></div>
-        </div>
         <div class="col-md-6">
             <div id="browser"></div>
         </div>
         <div class="col-md-6">
             <div id="device"></div>
+        </div>
+        <div class="col-md-12">
+                <div id="clicks"></div>
         </div>
     </div>
 </div>
