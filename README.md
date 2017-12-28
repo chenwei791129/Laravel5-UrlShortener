@@ -10,6 +10,7 @@ HTTP Server 可用在 IIS、apache、nginx
 ## 實際截圖
 
 ![image](https://github.com/chenwei791129/Laravel5-UrlShortener/blob/master/screenshots/homedemo.png)
+![image](https://github.com/chenwei791129/Laravel5-UrlShortener/blob/master/screenshots/urlmanage_demo.png)
 ![image](https://github.com/chenwei791129/Laravel5-UrlShortener/blob/master/screenshots/UrlShortener-demo.png)
 
 ## 如何開始？
